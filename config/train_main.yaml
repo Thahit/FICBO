@@ -1,0 +1,77 @@
+defaults:
+  - _self_
+  - encoder: encoder # encoder, encoder_with_time
+  - embedder: separate_expert_embedder #expert_embedder #embedder, separate_expert_embedder
+  - head: head
+  - task: ficbo_prior
+  - eval: default
+  - encoder_for_expert: encoder_for_expert
+  - embedder_for_expert: embedder_for_expert
+  - head_for_expert: head_for_expert
+  - expert_bias: expert_bias_with_switch # expert_bias, null, expert_bias_with_switch, expert_bias_with_switch_reweighted
+  - expert_model: xgboost
+
+seed: 123
+
+max_epoch: 200000
+burning_epoch: 20000 
+batch_size: 200 #200
+
+min_T: 10
+T: 20
+time_token: False #True
+
+# expert model
+expert_path: ""
+
+
+# Optimizer
+optimizer: AdamW
+lr: 1e-3
+weight_decay: 1e-7
+
+# Scheduler
+scheduler: CosineAnnealing
+scheduler_args: {T_0: 1000, T_mult: 2}
+
+# Loss
+loss: NMLELoss #unused arg
+gamma: .98
+alpha: 1  # mixing factor of design loss / reward loss
+alpha_nll: 0. # 1 for active learning, 0 to ignore nll reward
+alpha_max: 0  # weight for reward at the end for max value, 0.1
+alpha_impr: 10  # weight for improvement-based reward, 1
+loss_on_all_target: True # false # this is to train the prediction head even on targets we do not attend (this is for experiments where we dont want tl leak info from target points)
+pred_loss_on_query: True # false # this is to compute the prediction loss on the query points,
+
+fix_seed: True
+clip_grads: True
+design_type: random
+verbose: 500 
+device: cuda
+checkpoint: 50000   #5000,  0 if no checkpoint
+load_checkpoint: False
+checkpoint_name: ckpt.tar
+
+# Output
+output_dir: ./outputs
+file_name: ficbo_${task.name}.pth
+
+
+##### W&B config #####
+wandb:
+  group: ${task.name}
+  project: "ficbo"
+  use_wandb: true
+  log_freq: 1
+  run_name: ${task.name}-${task.dim_x}mainD-${now:%Y-%m-%d_%H-%M}
+  tags:
+    - maximize # maximize, BED
+    - main_model
+    - attend_to_queries
+    #- AL
+    #- time_encoder
+
+hydra:
+  run:
+    dir: ${output_dir}/hydra/${task.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}

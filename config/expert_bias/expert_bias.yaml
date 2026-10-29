@@ -1,0 +1,44 @@
+_target_: expert_models.bias_models.ExpertBiasEngine
+
+noise_level: [0.1, 1.]
+
+local_averaging: false # true
+local_averaging_alpha: [0.5, 0.8] #[0.05, 0.5]
+local_averaging_lengthscale: [0.4, 1] # [0.3, 1]
+
+anchoring: false # false
+anchor_alpha: [0.2, 0.5] 
+
+feature_weight: false # true
+feature_coef: [0.5, 0.5] # [0.1, 0.4]
+
+expectation_bias: false # false
+expectation_alpha: [0.05, 0.15]
+
+hard_easy: false # false
+hard_easy_alpha: [0.1, 0.3]
+
+simplification: false # false
+simplification_alpha: [0.3, 0.6]
+
+regression_to_mean: false  # false
+regression_alpha: [0.2, 0.5]
+
+cross_dim_confusion: false # false
+confusion_prob: [0.03, 0.1]
+
+perceived_max_bias: false # true
+perceived_max_alpha: [0.2, 0.4] # [0.05, 0.2]
+
+hetero_noise: false # true
+hetero_alpha: [0.5, 2.] 
+hetero_n_centers: [2, 5]
+hetero_decay: [0.5, 1.5]
+
+add_gp_bias: false # true
+add_gp_max_std: [0.5, 2] # [0.2, 0.5]
+add_gp_lengthscale: [1.0, 3.0]
+add_gp_scale: [0.5, 1] 
+
+uncertainty_noise_std_range: [0.1, 0.1]
+#device: cuda

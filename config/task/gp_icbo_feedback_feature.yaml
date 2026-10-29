@@ -1,0 +1,12 @@
+# GP-prior ICBO + feedback feature baseline, feedback enters as extra input dim at eval
+defaults:
+  - general_gp_prior
+  - _self_
+
+name: gp_icbo_feedback_feature
+
+# dimensions change depending on what task you want to solve
+dim_x: 3
+mineffective_dims: 3
+n_target_theta: 4
+n_context_init: 1

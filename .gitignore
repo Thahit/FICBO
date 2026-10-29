@@ -1,0 +1,9 @@
+**/__pycache__/
+notebooks/data/
+notebooks/figures/
+notebooks/.ipynb_checkpoints/
+notebooks/bench_results/
+notebooks/outputs
+outputs/
+logs/
+wandb/

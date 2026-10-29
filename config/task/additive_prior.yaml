@@ -1,0 +1,10 @@
+# use with expert_bias=additive
+defaults:
+  - ficbo_prior
+  - _self_
+
+_target_: tasks.gaussian_process.Additive_Expert_GPTask
+
+name: additive_prior
+
+uniform_fraction: .25 # rest sampled in clusters

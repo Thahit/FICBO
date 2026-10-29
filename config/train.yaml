@@ -1,0 +1,67 @@
+defaults:
+  - _self_
+  - encoder: encoder # encoder
+  - embedder: embedder #expert_embedder #embedder
+  - head: head
+  - task: general_gp_prior
+  - eval: default
+
+seed: 123
+
+max_epoch: 200000
+burning_epoch: 20000
+batch_size: 200 
+
+min_T: 10 
+T: 20 
+time_token: False # True
+
+# expert model
+expert_path: ""
+
+
+# Optimizer
+optimizer: AdamW
+lr: 1e-3
+weight_decay: 1e-7
+
+# Scheduler
+scheduler: CosineAnnealing
+scheduler_args: {T_0: 1000, T_mult: 2}
+
+# Loss
+loss: NMLELoss
+gamma: .98
+alpha: 1  # mixing factor of design loss 
+alpha_nll: 0.0 # 1 for active learning, 0 to ignore nll reward
+alpha_max: .0  # weight for reward at the end for max value
+alpha_impr: 1.0  # weight for improvement-based reward, not used
+
+# Training
+fix_seed: True
+clip_grads: True
+design_type: random
+verbose: 500
+device: cuda
+checkpoint: 50000   # 0 if no checkpoint
+load_checkpoint: False
+checkpoint_name: ckpt.tar
+
+# Output
+output_dir: ./outputs
+file_name: gp_icbo_${task.name}.pth
+
+
+##### W&B config #####
+wandb:
+  group: ${task.name}
+  project: "ficbo"
+  use_wandb: True
+  log_freq: 5
+  run_name: ${task.name}-${task.dim_x}D-${now:%Y-%m-%d_%H-%M}
+  tags:
+    - maximize # BED, maximize
+
+hydra:
+  run:
+    dir: ${output_dir}/hydra/${task.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}

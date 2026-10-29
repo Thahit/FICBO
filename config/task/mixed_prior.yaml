@@ -1,0 +1,14 @@
+defaults:
+  - ficbo_prior
+  - _self_
+
+_target_: tasks.gaussian_process.MixedPrior_Expert_GPTask
+
+name: mixed_prior
+
+p_additive: 0.5  # probability a batch is drawn from Additive_Expert_GPTask, otherwise WeightedMultiGP_Expert_GPTask
+
+# combined model in paper
+uniform_fraction: .25
+k_decoy_min: 2
+k_decoy_max: 8

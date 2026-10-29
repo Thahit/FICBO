@@ -1,0 +1,9 @@
+# GP-prior ICBO baseline
+defaults:
+  - general_gp_prior
+  - _self_
+
+name: gp_icbo
+
+mineffective_dims: 2
+n_context_init: 1

@@ -1,0 +1,7 @@
+_target_: model.encoder.EncoderWithTime
+dim_embedding: 32
+dim_feedforward: 128
+n_head: 4
+dropout: 0.0
+num_layers: 3
+attend_to_queries: False

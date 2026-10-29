@@ -1,0 +1,4 @@
+from .gaussian_process import GPTask, Expert_GPTask, Additive_Expert_GPTask, WeightedMultiGP_Expert_GPTask, MixedPrior_Expert_GPTask
+from .classic_benchmarks import BenchmarkTask, BenchmarkFeedbackTask
+from .airfoil_benchmark import AirfoilLiftDragTask, AirfoilNNFidelityTask
+from .ML_benchmark import NASBench201Task

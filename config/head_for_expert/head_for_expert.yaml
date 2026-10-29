@@ -1,0 +1,13 @@
+_target_: model.head.OutputHead
+
+dim_x: ${task.expert_dim_x_max}
+dim_y: ${task.dim_y}
+
+dim_embedding: ${encoder_for_expert.dim_embedding}
+dim_feedforward: ${encoder_for_expert.dim_feedforward}
+num_components: 10
+single_head: False
+std_min: 1e-4
+value_head: False
+
+time_token: ${time_token}

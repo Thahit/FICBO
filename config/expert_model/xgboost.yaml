@@ -1,0 +1,17 @@
+#expert_model_type: "sklearn"
+
+fit_on: ["expert", "context"]   
+
+sklearn_model:
+  type: xgboost
+  n_estimators: 10
+  max_depth: 3
+  learning_rate: 0.15
+  subsample: 0.8
+  colsample_bytree: 0.8
+  min_child_weight: 2
+  gamma: 0.0
+  reg_alpha: 0.0
+  reg_lambda: 1.0
+  random_state: 42
+  verbosity: 0
